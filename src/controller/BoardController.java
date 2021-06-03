@@ -31,7 +31,7 @@ public class BoardController extends HttpServlet {
     }
 
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("���� ����");
+    	System.out.println("borad controller");
     	request.setCharacterEncoding("utf-8");
     	HttpSession session = request.getSession();
 		String requestURI=request.getRequestURI();
@@ -43,7 +43,7 @@ public class BoardController extends HttpServlet {
 		
 		if(uri.equals("/boardWrite.a")) {
 			path="/boardSelect.a";
-			System.out.println("boardWrite.a ����");
+			System.out.println("boardWrite.a 실행");
 		
 			String email1=(String)session.getAttribute("email1");
 			
@@ -75,7 +75,7 @@ public class BoardController extends HttpServlet {
 			
 		}else if(uri.equals("/joinDelete.a")) {
 			path="/join.html";
-			System.out.println("delete�����غ�");
+			System.out.println("delete실행");
 			String email1=request.getParameter("email1");
 			String email2=request.getParameter("email2");
 			
@@ -85,7 +85,7 @@ public class BoardController extends HttpServlet {
 			
 		}else if(uri.equals("/boardSelect.a")) {
 			path="/notice_view.jsp";
-			System.out.println("boardSelect.a����");
+			System.out.println("boardSelect.a실행");
 			String date;
 			String email1=(String)session.getAttribute("email1");
 			if(request.getAttribute("date")!=null) {
@@ -116,7 +116,7 @@ public class BoardController extends HttpServlet {
 			
 			BoardDAO boardDAO = new BoardDAO(); 
 			int listCount=boardDAO.getListCount(); //��ü ����
-			System.out.println("��ü ���� :" +listCount);
+			System.out.println("전체행갯수 :" +listCount);
 			ArrayList<BoardBean> list=boardDAO.selectAll(page); //10���� ����
 
 			int maxPage=(int)((double)listCount/10+0.9);
@@ -133,6 +133,19 @@ public class BoardController extends HttpServlet {
 			pageInfo.setStartPage(startPage);
 						
 			request.setAttribute("pageInfo", pageInfo);
+			request.setAttribute("list",list);
+			
+		}else if(uri.equals("/selectIndex.a")) {
+			path="/main.jsp";
+					
+			System.out.println("selectIndex.a 실행");
+			
+			BoardDAO boardDAO = new BoardDAO(); 
+			
+			
+			ArrayList<BoardBean> list=boardDAO.selectIndex(); 
+
+			
 			request.setAttribute("list",list);
 			
 		}

@@ -23,7 +23,7 @@ public JoinBean select(String em1, String em2) {
 		try {
 			Class.forName(driver);
 			conn=DriverManager.getConnection(url, "jho","park");
-			System.out.println("DB ¿¬°á ¼º°ø");
+			System.out.println("DB ì—°ê²° ì„±ê³µ");
 
 			String sql ="select * from join_tb where jemail1=? and jemail2=?";
 			pstmt=conn.prepareStatement(sql);
@@ -55,7 +55,7 @@ public BoardBean select(String em1, String title, String date) {
 	try {
 		Class.forName(driver);
 		conn=DriverManager.getConnection(url, "jho","park");
-		System.out.println("DB ¿¬°á ¼º°ø");
+		System.out.println("DB ì—°ê²° ì„±ê³µ");
 
 		String sql ="select * from board_tb where bemail1=? and btitle=? and bdate=?";
 		pstmt=conn.prepareStatement(sql);
@@ -88,7 +88,7 @@ public BoardBean select(String em1, String title, String date) {
 		try {
 			Class.forName(driver);
 			conn=DriverManager.getConnection(url, "jho","park");
-			System.out.println("DB ¿¬°á ¼º°ø");
+			System.out.println("DB ì—°ê²° ì„±ê³µ");
 
 			String sql ="insert into board_tb values(board_sq.nextval,?,?,?,?,?,?)";
 			pstmt=conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public BoardBean select(String em1, String title, String date) {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("insert ¼º°ø");
+			System.out.println("insert ì„±ê³µ");
 			
 			pstmt.close();
 			conn.close();
@@ -118,9 +118,9 @@ public BoardBean select(String em1, String title, String date) {
 		try {
 			Class.forName(driver);
 			conn=DriverManager.getConnection(url,"jho","park");
-			System.out.println("DB ¿¬°áµÊ");
+			System.out.println("DB ì—°ê²°ì„±ê³µ");
 			
-			int startRow=(page-1)*10;	//½ÃÀÛ ÇàºÎÅÍ 10°³¾¿ Á¶È¸
+			int startRow=(page-1)*10;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 			String sql="select * from board_tb order by bnum desc";
 			pstmt=conn.prepareStatement(sql);	
 			rs=pstmt.executeQuery();				
@@ -134,6 +134,37 @@ public BoardBean select(String em1, String title, String date) {
 				board.setBfileName(rs.getString("bfileName"));
 				board.setBcontent(rs.getString("bcontent"));
 				board.setBdate(rs.getString("bdate"));
+				
+				list.add(board);
+			}			
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+public ArrayList<BoardBean> selectIndex() {
+		
+
+		try {
+			Class.forName(driver);
+			conn=DriverManager.getConnection(url,"jho","park");
+			System.out.println("DB ì—°ê²°ì„±ê³µ");
+			
+			
+			String sql="select * from (select * from board_tb order by bnum desc) where rownum<6";
+			pstmt=conn.prepareStatement(sql);	
+			rs=pstmt.executeQuery();				
+			
+			while(rs.next()){		
+				BoardBean board=new BoardBean();
+				
+				board.setBcontent(rs.getString("bcontent"));
+				
 				
 				list.add(board);
 			}			
