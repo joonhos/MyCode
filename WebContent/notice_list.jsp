@@ -26,7 +26,7 @@
 
 <body>
 	<ul class="skipnavi">
-		<li><a href="#container">본문내용</a></li>
+		<li><a href="#container">본문</a></li>
 	</ul>
 	<!-- wrap -->
 	<div id="wrap">
