@@ -119,10 +119,15 @@
 				<li class="bbs_title">${board.btitle }</li>
 				<li class="bbs_hit">작성일 : <span>${board.bdate }</span></li>
 				<li class="bbs_date">조회수 : <span>235</span></li>
+				
 				<li class="bbs_content">
 					<div class="editer_content">
 					   ${board.bcontent }
                     </div>
+                   
+				</li>
+				<li class="bbs_file">
+					 첨부파일 : <span>${board.bfileName }</span>
 				</li>
 			</ul>
 			<p class="btn_line txt_right">

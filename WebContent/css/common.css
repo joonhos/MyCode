@@ -282,6 +282,7 @@ footer .foot_area .snslink li + li + li a {background-image:url(../img/ico_insta
 .bbsview_list li.bbs_date {height:40px; line-height:40px; float:left; width:50%;}
 .bbsview_list li.bbs_content {clear:both; min-height:200px; padding:20px 15px;}
 .bbsview_list li.bbs_content .editer_content {line-height:1.4;}
+
 .near_list {border-top:1px solid #ccc;}
 .near_list li {padding:10px; border-bottom:1px solid #ccc;}
 .near_list li:after {content:""; display:block; clear:both;}
