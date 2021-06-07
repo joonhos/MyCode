@@ -6,6 +6,8 @@
 	String pass=(String)session.getAttribute("pass");
 	String email1=(String)session.getAttribute("email1");
 	String email2=(String)session.getAttribute("email2");
+	String fileName=(String)request.getAttribute("fileName");
+	System.out.println("notice_view.jsp" + fileName);
 	Date nowTime = new Date();
 	SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy년 MM월 dd일");
 %>
@@ -127,7 +129,7 @@
                    
 				</li>
 				<li class="bbs_file">
-					 첨부파일 : <span>${board.bfileName }</span>
+					 첨부파일 : <span><a href="fileDownload.jsp?fileName=<%=fileName%>">${board.bfileName }</span>
 				</li>
 			</ul>
 			<p class="btn_line txt_right">

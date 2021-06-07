@@ -46,7 +46,7 @@ public class BoardController extends HttpServlet {
 		String path=null;
 		
 		if(uri.equals("/boardWrite.a")) {
-			path="/boardSelect.a";
+			path="/boardSelectAll.a";
 			
 			System.out.println("boardWrite.a 실행");
 			String realFolder="";
@@ -60,6 +60,8 @@ public class BoardController extends HttpServlet {
 					new DefaultFileRenamePolicy());
 			
 		
+			
+			
 			String email1=(String)session.getAttribute("email1");
 			
 			Date nowTime = new Date();
@@ -86,6 +88,7 @@ public class BoardController extends HttpServlet {
 			
 			request.setAttribute("emial1", email1);
 			request.setAttribute("title", title);
+			request.setAttribute("fileName", boardFile);
 			
 		}else if(uri.equals("/joinDelete.a")) {
 			path="/join.html";
@@ -114,7 +117,10 @@ public class BoardController extends HttpServlet {
 			boardBean = boardDAO.select1(num);
 			
 			System.out.println(boardBean);
+			
 			request.setAttribute("board", boardBean);
+			String fileName=boardBean.getBfileName();
+			request.setAttribute("fileName", fileName);
 		}else if(uri.equals("/boardSelectAll.a")) {
 			path="/notice_list.jsp";
 			

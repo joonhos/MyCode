@@ -111,7 +111,7 @@ public BoardBean select1(int num) {
 			e.printStackTrace();
 		}
 		
-	
+		
 	}public ArrayList<BoardBean> selectAll(int page) {
 		
 
