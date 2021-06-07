@@ -87,7 +87,7 @@ public class BoardController extends HttpServlet {
 			path="/notice_view.jsp";
 			System.out.println("boardSelect.a실행");
 			String date;
-			String email1=(String)session.getAttribute("email1");
+			
 			if(request.getAttribute("date")!=null) {
 					date=(String)request.getAttribute("date");
 			}else {
@@ -96,11 +96,11 @@ public class BoardController extends HttpServlet {
 			String title=request.getParameter("title");
 			System.out.println(date);		
 			System.out.println(title);		
-			System.out.println(email1);		
+				
 			
 			BoardDAO boardDAO = new BoardDAO();
 			BoardBean boardBean = new BoardBean();
-			boardBean = boardDAO.select(email1, title, date);
+			boardBean = boardDAO.select1(title, date);
 			
 			System.out.println(boardBean);
 			request.setAttribute("board", boardBean);

@@ -210,7 +210,7 @@
                     <h3>NOTICE</h3>
                     <ul class="notice_recent">
                     <c:forEach var="board" items="${list }">
-                    	<li><a href="javascript:;">
+                    	<li><a href="boardSelectAll.a">
                             ${board.bcontent }</a></li>
                     
                     

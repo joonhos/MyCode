@@ -149,7 +149,8 @@
 					<c:forEach var="board" items="${list }">
 					<tr>
 						<td>${board.bnum }</td>
-						<td><a href="boardSelect.a?num=${board.bnum }&title=${board.btitle}
+						<td>
+						<a href="boardSelect.a?num=${board.bnum }&title=${board.btitle}
 						&date=${board.bdate }">${board.btitle }</a></td>
 						<td>${board.bemail1 }</td>					
 						<td>${board.bdate }</td>
