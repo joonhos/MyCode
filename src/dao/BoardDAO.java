@@ -57,7 +57,7 @@ public BoardBean select1(String title, String date) {
 		conn=DriverManager.getConnection(url, "jho","park");
 		System.out.println("DB 연결 성공");
 
-		String sql ="select * from board_tb where and btitle=? and bdate=?";
+		String sql ="select * from board_tb where btitle=? and bdate=?";
 		pstmt=conn.prepareStatement(sql);
 		pstmt.setString(1,title);
 		pstmt.setString(2,date);
