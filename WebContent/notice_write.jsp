@@ -116,7 +116,7 @@
 		<!-- bodytext_area -->
 	<div class="bodytext_area box_inner" >
 			<!-- appForm -->
-			<form action="boardWrite.a" class="appForm" method="post">
+			<form action="boardWrite.a" class="appForm" method="post" enctype="multipart/form-data">
 				<fieldset>
 					<legend>고객지원 센터 글쓰기</legend>
 					<p class="info_pilsoo pilsoo_item">파일 전송 최대용량은 500Mb 입니다.</p>

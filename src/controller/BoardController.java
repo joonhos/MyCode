@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.BoardDAO;
 import dao.JoinDAO;
@@ -43,7 +47,18 @@ public class BoardController extends HttpServlet {
 		
 		if(uri.equals("/boardWrite.a")) {
 			path="/boardSelect.a";
+			
 			System.out.println("boardWrite.a 실행");
+			String realFolder="";
+			String saveFolder="/images";
+			String encType="utf-8";
+			int maxSize=5*104*1024;
+			
+			ServletContext context=request.getServletContext();
+			realFolder=context.getRealPath(saveFolder);
+			MultipartRequest multi=new MultipartRequest(request, realFolder, maxSize, encType,
+					new DefaultFileRenamePolicy());
+			
 		
 			String email1=(String)session.getAttribute("email1");
 			
@@ -51,12 +66,12 @@ public class BoardController extends HttpServlet {
 			SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 			String date=sdfmt.format(nowTime);
 			
-			String[] subject1=request.getParameterValues("subject");
+			String[] subject1=multi.getParameterValues("subject");
 			String subject=subject1[0];
-			String title=request.getParameter("title");
+			String title=multi.getParameter("title");
 		
-			String boardFile=request.getParameter("boardFile");
-			String content=request.getParameter("content");
+			String boardFile=multi.getFilesystemName("boardFile");
+			String content=multi.getParameter("content");
 			
 			BoardBean board=new BoardBean();
 			board.setBemail1(email1);
@@ -70,7 +85,6 @@ public class BoardController extends HttpServlet {
 			boardDAO.insert(board);
 			
 			request.setAttribute("emial1", email1);
-			request.setAttribute("date", date);
 			request.setAttribute("title", title);
 			
 		}else if(uri.equals("/joinDelete.a")) {
@@ -87,20 +101,17 @@ public class BoardController extends HttpServlet {
 			path="/notice_view.jsp";
 			System.out.println("boardSelect.a실행");
 			String date;
+			int num = Integer.parseInt(request.getParameter("num"));
 			
-			if(request.getAttribute("date")!=null) {
-					date=(String)request.getAttribute("date");
-			}else {
-					date=request.getParameter("date");
-			}
-			String title=request.getParameter("title");
-			System.out.println(date);		
-			System.out.println(title);		
+			
+			
+			System.out.println(num);		
+			
 				
 			
 			BoardDAO boardDAO = new BoardDAO();
 			BoardBean boardBean = new BoardBean();
-			boardBean = boardDAO.select1(title, date);
+			boardBean = boardDAO.select1(num);
 			
 			System.out.println(boardBean);
 			request.setAttribute("board", boardBean);

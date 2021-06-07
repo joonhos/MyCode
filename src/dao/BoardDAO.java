@@ -50,17 +50,17 @@ public JoinBean select(String em1, String em2) {
 		}
 		return join;
 	}
-public BoardBean select1(String title, String date) {
+public BoardBean select1(int num) {
 	BoardBean board =new BoardBean();
 	try {
 		Class.forName(driver);
 		conn=DriverManager.getConnection(url, "jho","park");
 		System.out.println("DB 연결 성공");
 
-		String sql ="select * from board_tb where btitle=? and bdate=?";
+		String sql ="select * from board_tb where bnum=?";
 		pstmt=conn.prepareStatement(sql);
-		pstmt.setString(1,title);
-		pstmt.setString(2,date);
+		pstmt.setInt(1,num);
+		
 		rs=pstmt.executeQuery();
 		
 		while(rs.next()) {
@@ -111,6 +111,7 @@ public BoardBean select1(String title, String date) {
 			e.printStackTrace();
 		}
 		
+	
 	}public ArrayList<BoardBean> selectAll(int page) {
 		
 

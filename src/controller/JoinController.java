@@ -108,7 +108,7 @@ public class JoinController extends HttpServlet {
 			if(join.getJemail1()==null || 
 					join.getJemail2()==null || join.getJpass()==null) {
 				
-				session.setAttribute("loginFail","���̵� �Ǵ� ��й�ȣ�� Ʋ���ϴ�.");
+				session.setAttribute("loginFail","아이디와 비빌번호가 일치하지 않습니다.");
 				response.sendRedirect("login.jsp");
 			}else {
 				path="/index.jsp";
