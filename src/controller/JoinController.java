@@ -118,7 +118,7 @@ public class JoinController extends HttpServlet {
 				request.setAttribute("join", join);
 			}
 		}else if(uri.equals("/logout.do")) {
-			path="/index.html";
+			path="/index.jsp";
 			
 			System.out.println("logout.do 실행");
 			session.removeAttribute("email1");
