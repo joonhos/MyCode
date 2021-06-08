@@ -121,8 +121,13 @@ public BoardBean select1(int num) {
 			System.out.println("DB 연결성공");
 			
 			int startRow=(page-1)*10;	//���� ����� 10���� ��ȸ
-			String sql="select * from board_tb order by bnum desc";
+			String sql="SELECT * FROM (SELECT  SEQ, BNUM, "
+					+ "BEMAIL1, BSUBJECT, BTITLE, BFILENAME, BCONTENT, BDATE  FROM "
+					+ "(SELECT ROWNUM AS SEQ, BNUM, BEMAIL1, BSUBJECT, BTITLE, BFILENAME,"
+					+ " BCONTENT, BDATE FROM(SELECT * FROM BOARD_TB ORDER BY BNUM DESC))"
+					+ " WHERE SEQ>?) WHERE ROWNUM<=7";
 			pstmt=conn.prepareStatement(sql);	
+			pstmt.setInt(1, startRow);
 			rs=pstmt.executeQuery();				
 			
 			while(rs.next()){		

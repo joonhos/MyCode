@@ -165,20 +165,30 @@
 						<div align="right"><a href="notice_write.jsp" class="btn_srch" >글쓰기</a></div>
 						<%} %>
 				<!-- pagination -->
+				
 				<div class="pagination">
-					<a href="javascript:;" class="firstpage  pbtn"><img
-						src="img/btn_firstpage.png" alt="첫 페이지로 이동"></a> <a
-						href="javascript:;" class="prevpage  pbtn"><img
-						src="img/btn_prevpage.png" alt="이전 페이지로 이동"></a> <a
-						href="javascript:;"><span class="pagenum currentpage">1</span></a>
-					<a href="javascript:;"><span class="pagenum">2</span></a> <a
-						href="javascript:;"><span class="pagenum">3</span></a> <a
-						href="javascript:;"><span class="pagenum">4</span></a> <a
-						href="javascript:;"><span class="pagenum">5</span></a> <a
-						href="javascript:;" class="nextpage  pbtn"><img
-						src="img/btn_nextpage.png" alt="다음 페이지로 이동"></a> <a
-						href="javascript:;" class="lastpage  pbtn"><img
-						src="img/btn_lastpage.png" alt="마지막 페이지로 이동"></a>
+					<c:if test="${pageInfo.page<=1 }" >
+						<img src="img/btn_prevpage.png" alt="이전 페이지로 이동">
+					</c:if>
+					<c:if test="${pageInfo.page>1}">
+						<a href="boardSelectAll.a?page=${pageInfo.page-1 }">
+						<img src="img/btn_prevpage.png" alt="이전 페이지로 이동"></a>&nbsp; 
+					</c:if>
+					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+						<c:if test="${i==pageInfo.page }">
+							<span class="pagenum currentpage">${pageInfo.page }</span>
+						</c:if>
+						<c:if test="${i!=pageInfo.page }">
+							<a href="boardSelectAll.a?page=${i }"><span class="pagenum">${i }</span></a>&nbsp;
+						</c:if>
+					</c:forEach>
+					<c:if test="${pageInfo.page>=pageInfo.maxPage }">
+						<img src="img/btn_nextpage.png" alt="다음 페이지로 이동">
+					</c:if>
+					<c:if test="${pageInfo.page<pageInfo.maxPage }">
+						<a href="boardSelectAll.a?page=${pageInfo.page+1 }">
+						<img src="img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
+					</c:if>
 				</div>
 				<!-- //pagination -->
 
