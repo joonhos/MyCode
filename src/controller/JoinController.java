@@ -16,7 +16,7 @@ import vo.JoinBean;
 
 @WebServlet("*.do")
 public class JoinController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	
        
    
     public JoinController() {
@@ -59,6 +59,7 @@ public class JoinController extends HttpServlet {
 			
 			JoinDAO joinDAO=new JoinDAO();
 			joinDAO.insert(join);
+			
 			
 			request.setAttribute("name",name);
 			request.setAttribute("pass",pass);
