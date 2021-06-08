@@ -1,22 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String email1=request.getParameter("email1");
-	String email2=request.getParameter("email2");
-	String pass=request.getParameter("pass");
-	String name=request.getParameter("name");
 
-	if(email1==null || email2==null || pass==null){
-		
-		response.sendRedirect("join.jsp");
-	
-	}
-	
-%>    
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title> MYPAGE | JHO Service </title>
+<title> 회원가입 | JHO Service </title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,13 +29,13 @@
 
 	<header id="header">
 		<div class="header_area box_inner clear">	
-			<h1><a href="javascript:;">JHO Service</a></h1>
+			<h1><a href="javascript;">JHO Service</a></h1>
 			<p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
 			<!-- header_cont -->
 			<div class="header_cont">
 				<ul class="util clear">
-					<li><a href="javascript:;">마이페이지</a></li>
-					<li><a href="javascript:;">로그아웃</a></li>
+					<li><a href="javascript:;">로그인</a></li>
+					<li><a href="javascript:;">회원가입</a></li>
 				</ul>		
 				<nav>
 					<ul class="gnb clear">
@@ -103,9 +93,9 @@
 		<div class="location_area member">
 			<div class="box_inner">
 				<h2 class="tit_page">JHO Service <span class="in">for</span> Better Life</h2>
-				<p class="location">MYPAGE <span class="path">/</span> 개인 정보 수정</p>
+				<p class="location">MEMBER <span class="path">/</span> 회원가입</p>
 				<ul class="page_menu clear">
-					<li><a href="#" class="on">개인 정보 수정</a></li>
+					<li><a href="javascript:;" class="on">회원가입</a></li>
 				</ul>
 			</div>
 		</div>	
@@ -113,79 +103,66 @@
 
 		<!-- bodytext_area -->
 		<div class="bodytext_area box_inner">
-			<!-- myinfo -->
-			<dl class="myinfo">
-				<dt>내 정보</dt>
-				<dd>
-					<!-- appForm -->
-					
-						<fieldset>
-							<legend>내정보 입력 양식</legend>
-							<form action="joinInsert.do" class="regForm" method="post">
-							<ul class="reg_list">
-								<li class="clear">
-									<span class="tit_lbl">이름</span>
-									<div class="reg_content">${join.jname }</div>
-								</li>
-								<li class="clear">
-									<label class="tit_lbl">비밀번호</label>
-									<div class="reg_content">${join.jpass }</div>
-								</li>
-								<li class="clear">
-									<label class="tit_lbl">성별</label>
-									<div class="reg_content">${join.jsex }</div>
-								</li>
-								
-								<li class="clear">
-									<span class="tit_lbl">연락처</span>
-									<div class="reg_content">${join.jtel }</div>
-								</li>
-								<li class="clear">
-									<span class="tit_lbl">SMS 수신동의</span>
-									<div class="reg_content radio_area">
-										<input type="radio" class="css-radio" id="smsyes_lbl" name="smsyesno" checked><label for="smsyes_lbl">허용</label>
-										<input type="radio" class="css-radio" id="smsno_lbl" name="smsyesno"><label for="smsno_lbl">거부</label>
-										<p class="info_line">(고객님의 편의를 위해 알림, 공지사항, 이벤트 등의 내용을 제공하고자 합니다.)</p>
-									</div>
-								</li>
-								<li class="clear">
-									<span class="tit_lbl">이메일</span>
-									<div class="reg_content">${join.jemail1 }@${join.jemail2 }</div>
-								</li>
-								<li class="clear">
-									<span class="tit_lbl">이메일 수신동의</span>
-									<div class="reg_content radio_area">
-										<input type="radio" class="css-radio" id="emailyes_lbl" name="emailyesno" checked><label for="emailyes_lbl">허용</label>
-										<input type="radio" class="css-radio" id="emailno_lbl" name="emailyesno"><label for="emailno_lbl">거부</label>
-										<p class="info_line">(고객님의 편의를 위해 알림, 공지사항, 이벤트 등의 내용을 제공하고자 합니다.)</p>
-									</div>
-								</li>
-								<li class="clear">
+			<!-- appForm -->
+			<form action="join.do" class="appForm" method="post">
+				<fieldset>
+					<legend>회원가입 입력 양식</legend>
+					<p class="info_pilsoo pilsoo_item">필수입력</p>
+					<ul class="app_list">
+						<li class="clear">
+                            <label for="email_lbl" class="tit_lbl pilsoo_item">이메일</label>
+                            <div class="app_content email_area">
+                                <input type="text" class="w160" name="email1"id="email_lbl" title="이메일 주소" />
+                                <span class="ico_space">@</span>
+                                <input type="text" name="email2" class="w160" title="이메일 제공업체 입력" />										
+                                <div class="select_common">
+                                    <select title="이메일 제공업체 목록">
+                                        <option value="">직접입력</option>
+                                        <option value="">naver.com</option>
+                                        <option value="">hanmail.net</option>
+                                    </select>
+                                </div>										
+                            </div>
+						</li>
+						<li class="clear">
+							<label for="name_lbl" class="tit_lbl pilsoo_item">이름</label>
+							<div class="app_content"><input type="text" class="w100p" name="name" id="name_lbl" placeholder="이름을 입력해주세요"/></div>
+						</li>
+						<li class="clear">
+							<label for="pwd_lbl" class="tit_lbl pilsoo_item">비밀번호</label>
+							<div class="app_content"><input type="password" class="w100p" id="pwd_lbl" name="pass" placeholder="비밀번호를 입력해주세요"/></div>
+						</li>
+						<li class="clear">
+							<label for="pwd2_lbl" class="tit_lbl pilsoo_item">비밀번호 확인</label>
+							<div class="app_content"><input type="password" name="passcheck" class="w100p" id="pwd2_lbl" placeholder="비밀번호를 다시 한번 입력해주세요"/></div>
+						</li>
+						<li class="clear">
+							<label for="phone_lbl" class="tit_lbl pilsoo_item">연락처</label>
+							<div class="app_content"><input type="text" name="tel" class="w100p" id="phone_lbl" placeholder="휴대폰”-”없이 숫자만 입력하세요"/></div>
+						</li>
+						<li class="clear">
+							<span class="tit_lbl">성별</span>
+							<div class="app_content radio_area">
+								<input type="radio" value="남" class="css-radio" id="mmm_lbl" name="gender"><label for="mmm_lbl">남</label>
+								<input type="radio" value="여" class="css-radio" id="www_lbl" name="gender"><label for="www_lbl">여</label>
+							</div>
+						</li>
+						<li class="clear">
+                            <span class="tit_lbl">개인정보 활용동의</span>
+							<div class="app_content checkbox_area">
+								<input type="checkbox"  value="1" class="css-checkbox" id="agree_lbl" name="agree"><label for="agree_lbl">동의함</label>
+							</div>
+						</li>
+						<li class="clear">
 							<label for="content_lbl" class="tit_lbl">문의내용</label>
-							<div class="app_content"><textarea id="content_lbl" value="${join.jcontent }" name="content" class="w100p" placeholder="간단한 상담 요청 사항을 남겨주시면 보다 상세한 상담이 가능합니다.
+							<div class="app_content"><textarea id="content_lbl" name="content" class="w100p" placeholder="간단한 상담 요청 사항을 남겨주시면 보다 상세한 상담이 가능합니다.
 전화 상담 희망시 기재 부탁드립니다."></textarea></div>
 						</li>
-							</ul>
-							</form>
-							
-							<form action="join_edit.jsp">
-							<div align="center"><input type="button" onClick="location.href='index.jsp'" value="확인">
-							<input type="hidden" name="email1" value="${join.jemail1 }">
-							<input type="hidden" name="email2" value="${join.jemail2 }">
-							<input type="hidden" name="pass" value="${join.jpass }">
-							<input type="hidden" name="name" value="${join.jname }">
-							<input type="submit" value="수정"></div>
-							</form>
-					
-														
-							
-							
-						</fieldset>
-					
-					<!-- //appForm -->
-				</dd>
-			</dl>
-			<!-- //myinfo -->			
+					</ul>
+					<p class="btn_line"><input type="submit" value="확인" class="btn_baseColor"/></p>	
+				</fieldset>
+			</form>
+			<!-- //appForm -->
 			
 		</div>
 		<!-- //bodytext_area -->
@@ -221,7 +198,7 @@
 </div>
 <!-- //wrap -->
 
-<h2 class="hdd">빠른 링크 : 전화 문의,카카오톡,오시는 길,꼭대기로</h2>
+<h2 class="hdd">빠른 링크 : 전화 문의, 카카오톡, 오시는 길, 꼭대기로</h2>
 <div class="quick_area">
 	<ul class="quick_list">
 		<li><a href="tel:010-7184-4403"><h3>전화 문의</h3><p>010-1234-5678</p></a></li>

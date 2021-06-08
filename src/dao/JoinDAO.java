@@ -22,7 +22,7 @@ public JoinBean select(String em1, String em2) {
 		try {
 			Class.forName(driver);
 			conn=DriverManager.getConnection(url, "jho","park");
-			System.out.println("DB ¿¬°á ¼º°ø");
+			System.out.println("DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 			String sql ="select * from join_tb where jemail1=? and jemail2=?";
 			pstmt=conn.prepareStatement(sql);
@@ -54,7 +54,7 @@ public JoinBean select(String em1, String em2, String pass) {
 	try {
 		Class.forName(driver);
 		conn=DriverManager.getConnection(url, "jho","park");
-		System.out.println("DB ¿¬°á ¼º°ø");
+		System.out.println("DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 		String sql ="select * from join_tb where jemail1=? and jemail2=? and jpass=?";
 		pstmt=conn.prepareStatement(sql);
@@ -88,7 +88,7 @@ public JoinBean select(String em1, String em2, String pass) {
 		try {
 			Class.forName(driver);
 			conn=DriverManager.getConnection(url, "jho","park");
-			System.out.println("DB ¿¬°á ¼º°ø");
+			System.out.println("DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 			String sql ="insert into join_tb values(join_seq.nextval,?,?,?,?,?,?,?,?)";
 			pstmt=conn.prepareStatement(sql);
@@ -132,6 +132,45 @@ public JoinBean select(String em1, String em2, String pass) {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,email1);
 			pstmt.setString(2,email2);
+			System.out.println(sql);
+			pstmt.executeUpdate();
+
+			
+			pstmt.close();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void update(JoinBean join) {
+		
+		System.out.println(join.getJemail1());				
+		System.out.println(join.getJemail2());	
+		
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		String driver="oracle.jdbc.driver.OracleDriver";
+		String url="jdbc:oracle:thin:@localhost:1521:orcl";
+		
+		try {
+			Class.forName(driver);
+			conn=DriverManager.getConnection(url,"jho","park");
+			
+			String sql ="UPDATE join_tb	SET	jpass=?, jtel=?, jsex=?, jcheck=?, jcontent=?"
+					+ " WHERE jname=? and jemail1=? and jemail2=?";
+					
+						
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,join.getJpass());
+			pstmt.setString(2,join.getJtel());
+			pstmt.setString(3,join.getJsex());
+			pstmt.setString(4,join.getJcheck());
+			pstmt.setString(5,join.getJcontent());
+			pstmt.setString(6,join.getJname());
+			pstmt.setString(7,join.getJemail1());
+			pstmt.setString(8,join.getJemail2());
+			
 			System.out.println(sql);
 			pstmt.executeUpdate();
 

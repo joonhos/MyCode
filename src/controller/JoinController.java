@@ -36,7 +36,7 @@ public class JoinController extends HttpServlet {
 		String path=null;
 		
 		if(uri.equals("/join.do")) {
-			path="/mypage.jsp";
+			path="/mypageSelect.do";
 			System.out.println("join do실행");
 			String name=request.getParameter("name");
 			String pass=request.getParameter("pass");
@@ -61,17 +61,9 @@ public class JoinController extends HttpServlet {
 			joinDAO.insert(join);
 			
 			
-			request.setAttribute("name",name);
-			request.setAttribute("pass",pass);
-			request.setAttribute("tel",tel);
-			request.setAttribute("email1",email1);
-			request.setAttribute("email2",email2);
-			request.setAttribute("sex",sex);
-			request.setAttribute("agree",agree);
-			request.setAttribute("content",content);
-		
+					
 		}else if(uri.equals("/joinDelete.do")) {
-			path="/join.html";
+			path="/join.jsp";
 			System.out.println("delete do 실행");
 			String email1=request.getParameter("email1");
 			String email2=request.getParameter("email2");
@@ -81,7 +73,7 @@ public class JoinController extends HttpServlet {
 			
 			
 		}else if(uri.equals("/mypageSelect.do")) {
-			path="/mypage1.jsp";
+			path="/mypage.jsp";
 			System.out.println("select실행�");
 			
 			String email1=(String)session.getAttribute("email1");
@@ -94,7 +86,35 @@ public class JoinController extends HttpServlet {
 			JoinBean joinBean=joinDAO.select(email1, email2);
 			System.out.println(joinBean);
 			request.setAttribute("join", joinBean);
-		}else if(uri.equals("/login.do")) {
+		}else if(uri.equals("/joinUpdate.do")) {
+			path="/mypageSelect.do";
+			System.out.println("joinUpdate.do 실행");
+			
+			String name=request.getParameter("name");
+			String pass=request.getParameter("pass");
+			String tel=request.getParameter("tel");
+			String email1=request.getParameter("email1");
+			String email2=request.getParameter("email2");
+			String sex=request.getParameter("gender");
+			String agree=request.getParameter("agree");
+			String content=request.getParameter("content");
+			
+			JoinBean join=new JoinBean();
+			join.setJname(name);
+			join.setJpass(pass);
+			join.setJtel(tel);
+			join.setJemail1(email1);
+			join.setJemail2(email2);
+			join.setJsex(sex);
+			join.setJcheck(agree);
+			join.setJcontent(content);
+			
+			JoinDAO joinDAO=new JoinDAO();
+			joinDAO.update(join);
+			
+			
+		}
+		else if(uri.equals("/login.do")) {
 		
 			System.out.println("login.do 실행");
 			String email1=request.getParameter("email1");
